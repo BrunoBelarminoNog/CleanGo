@@ -14,14 +14,16 @@ export const Item = styled.div`
 
 interface ButtonOpProps {
   isLeft?: boolean;
+  disable: boolean;
 }
 
 export const ButtonOp = styled.button`
   background: var(--white);
   z-index: 3;
   height: 100%;
-  cursor: pointer;
-  color: green;
+  cursor: ${(props: ButtonOpProps) => props.disable && "default"};
+  color: ${(props: ButtonOpProps) =>
+    props.disable ? "var(--gray)" : "var(--green)"};
 
   border: 3px solid var(--green);
   border-left: ${(props: ButtonOpProps) =>
@@ -29,6 +31,8 @@ export const ButtonOp = styled.button`
   border-right: ${(props: ButtonOpProps) =>
     !props.isLeft ? "3px solid var(--green)" : "none"};
 
+  border-color: ${(props: ButtonOpProps) =>
+    props.disable ? "var(--gray)" : "var(--green)"};
   border-radius: ${(props: ButtonOpProps) =>
     props.isLeft ? "4px 0 0 4px" : "0 4px 4px 0"}; ;
 `;

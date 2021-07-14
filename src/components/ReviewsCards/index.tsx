@@ -1,5 +1,6 @@
 import React from "react";
-import { FaStar } from "react-icons/fa";
+import { FaStar, FaRegStar } from "react-icons/fa";
+import { FeedBackData } from "../../types/feedbackData";
 import {
   Container,
   ReviewContent,
@@ -8,116 +9,72 @@ import {
   Stars,
 } from "./styles";
 
-const ReviewsCards = () => {
+interface ReviewsCardsProps {
+  feedbacks: FeedBackData[];
+  error: boolean;
+}
+
+const ReviewsCards = ({ feedbacks, error }: ReviewsCardsProps) => {
   return (
     <Container>
       <h2>Últimas avaliações</h2>
       <ReviewsWrapper>
-        <ReviewsCard>
-          <Stars>
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-          </Stars>
-          <ReviewContent>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam,
-            nostrum dignissimos! Ut quod soluta alias? Sapiente deleniti
-            explicabo iusto ratione numquam sed, odit aliquid rem eaque illo
-            quos, alias iure.
-          </ReviewContent>
-        </ReviewsCard>
-        <ReviewsCard>
-          <Stars>
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-          </Stars>
-          <ReviewContent>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam,
-            nostrum dignissimos! Ut quod soluta alias? Sapiente deleniti
-            explicabo iusto ratione numquam sed, odit aliquid rem eaque illo
-            quos, alias iure.
-          </ReviewContent>
-        </ReviewsCard>
-        <ReviewsCard>
-          <Stars>
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-          </Stars>
-          <ReviewContent>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam,
-            nostrum dignissimos! Ut quod soluta alias? Sapiente deleniti
-            explicabo iusto ratione numquam sed, odit aliquid rem eaque illo
-            quos, alias iure.
-          </ReviewContent>
-        </ReviewsCard>
-        <ReviewsCard>
-          <Stars>
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-          </Stars>
-          <ReviewContent>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam,
-            nostrum dignissimos! Ut quod soluta alias? Sapiente deleniti
-            explicabo iusto ratione numquam sed, odit aliquid rem eaque illo
-            quos, alias iure.
-          </ReviewContent>
-        </ReviewsCard>
-        <ReviewsCard>
-          <Stars>
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-          </Stars>
-          <ReviewContent>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam,
-            nostrum dignissimos! Ut quod soluta alias? Sapiente deleniti
-            explicabo iusto ratione numquam sed, odit aliquid rem eaque illo
-            quos, alias iure.
-          </ReviewContent>
-        </ReviewsCard>
-        <ReviewsCard>
-          <Stars>
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-          </Stars>
-          <ReviewContent>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam,
-            nostrum dignissimos! Ut quod soluta alias? Sapiente deleniti
-            explicabo iusto ratione numquam sed, odit aliquid rem eaque illo
-            quos, alias iure.
-          </ReviewContent>
-        </ReviewsCard>
-        <ReviewsCard>
-          <Stars>
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-            <FaStar />
-          </Stars>
-          <ReviewContent>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magnam,
-            nostrum dignissimos! Ut quod soluta alias? Sapiente deleniti
-            explicabo iusto ratione numquam sed, odit aliquid rem eaque illo
-            quos, alias iure.
-          </ReviewContent>
-        </ReviewsCard>
+        {error || feedbacks.length === 0 ? (
+          <span>Não há feedbacks para exibir</span>
+        ) : (
+          <>
+            {feedbacks.map((feedback) => {
+              return (
+                <ReviewsCard>
+                  <Stars>
+                    {feedback.score === 5 ? (
+                      <Stars>
+                        <FaStar />
+                        <FaStar />
+                        <FaStar />
+                        <FaStar />
+                        <FaStar />
+                      </Stars>
+                    ) : feedback.score === 4 ? (
+                      <Stars>
+                        <FaStar />
+                        <FaStar />
+                        <FaStar />
+                        <FaStar />
+                        <FaRegStar />
+                      </Stars>
+                    ) : feedback.score === 3 ? (
+                      <Stars>
+                        <FaStar />
+                        <FaStar />
+                        <FaStar />
+                        <FaRegStar />
+                        <FaRegStar />
+                      </Stars>
+                    ) : feedback.score === 2 ? (
+                      <Stars>
+                        <FaStar />
+                        <FaStar />
+                        <FaRegStar />
+                        <FaRegStar />
+                        <FaRegStar />
+                      </Stars>
+                    ) : (
+                      <Stars>
+                        <FaStar />
+                        <FaRegStar />
+                        <FaRegStar />
+                        <FaRegStar />
+                        <FaRegStar />
+                      </Stars>
+                    )}
+                  </Stars>
+                  <ReviewContent>{feedback.feedback}</ReviewContent>
+                </ReviewsCard>
+              );
+            })}
+          </>
+        )}
       </ReviewsWrapper>
     </Container>
   );

@@ -1,13 +1,21 @@
 import React from "react";
 import { BtnLink, Container, Links } from "./styles";
 
-const HeaderNav = () => {
+interface HeaderNavProps {
+  whiteSchema?: boolean;
+}
+const HeaderNav = ({ whiteSchema = false }: HeaderNavProps) => {
   return (
     <Container>
-      <Links to="/sejaumparceiro">Trabalhe com a CleanGo</Links>
-      <Links to="/login">Login</Links>
-      <Links to="/cadastro">Cadastro</Links>
-      <BtnLink to="/servicos">Solicite um serviço</BtnLink>
+      <Links to="/sejaumparceiro" whiteSchema={whiteSchema}>
+        Trabalhe com a CleanGo
+      </Links>
+      <Links to="/login" whiteSchema={whiteSchema}>
+        Login
+      </Links>
+      <BtnLink to="/cadastro" whiteSchema={whiteSchema}>
+        Cadastro
+      </BtnLink>
     </Container>
   );
 };

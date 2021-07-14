@@ -57,7 +57,7 @@ const LoginPage = () => {
 
   return (
     <>
-      <TitlePage />
+      <TitlePage title="Login" />
       <Header>
         <HeaderNav />
       </Header>

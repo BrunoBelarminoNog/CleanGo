@@ -38,6 +38,13 @@ export const ReviewsWrapper = styled.ul`
   max-height: 60vh;
   overflow-y: auto;
   padding-right: 16px;
+  width: 100%;
+
+  > span {
+    font-size: 1rem;
+    width: 100%;
+    color: var(--dark-gray);
+  }
 
   &:hover li:not(:hover) {
     opacity: 0.5;
@@ -99,4 +106,6 @@ export const Stars = styled.div`
 export const ReviewContent = styled.p`
   font-size: 1rem;
   color: var(--black);
+  text-align: left;
+  width: 100%;
 `;

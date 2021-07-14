@@ -23,7 +23,7 @@ export const Container = styled.main`
     content: "";
     width: 392px;
     height: 444px;
-    position: absolute;
+    position: fixed;
     bottom: 0;
     right: 0;
     background-image: url(${LogoBack});
@@ -42,7 +42,7 @@ export const WrapperForm = styled.section`
   border-radius: 4px;
   overflow: hidden;
   position: relative;
-
+  margin-bottom: 3rem;
   @media screen and (min-width: 600px) {
     padding: 42px 64px;
   }

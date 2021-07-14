@@ -26,6 +26,10 @@ export const ButtonItem = styled.button`
     background-color: var(--dark-green);
   }
 
+  &:disabled {
+    background-color: var(--gray);
+  }
+
   @media (min-width: 800px) {
     font-size: 22px;
   }

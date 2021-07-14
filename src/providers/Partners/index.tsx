@@ -30,7 +30,7 @@ interface PartnersContextProps {
     history: History,
     setLoad: Dispatch<boolean>
   ) => void;
-  editPartner: (partner: PartnerData, id: string, token: string) => void;
+  editPartner: (partner: PartnerData, id: number, token: string) => void;
 }
 
 interface PartnersProviderProps {
@@ -76,7 +76,7 @@ export const PartnersProvider = ({ children }: PartnersProviderProps) => {
       });
   };
 
-  const editPartner = (partner: PartnerData, id: string, token: string) => {
+  const editPartner = (partner: PartnerData, id: number, token: string) => {
     api
       .patch(`users/${id}`, partner, {
         headers: {

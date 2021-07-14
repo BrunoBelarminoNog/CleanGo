@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 
 import ArrowDown from "../../asssets/svg/arrowdown.svg";
 
@@ -10,11 +10,54 @@ interface ButtonFormProps {
   load?: boolean;
 }
 
+const appearAnimation = keyframes`
+  from {
+    transform: translateX(40px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+`;
+
 export const FormStyled = styled.form`
   display: flex;
   flex-direction: column;
   margin: 2rem 0 1rem;
   width: 100%;
+
+  > * {
+    opacity: 0;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+    animation-name: ${appearAnimation};
+    &:nth-child(1) {
+      animation-delay: 0.1s;
+    }
+    &:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    &:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+    &:nth-child(4) {
+      animation-delay: 0.4s;
+    }
+    &:nth-child(5) {
+      animation-delay: 0.5s;
+    }
+    &:nth-child(6) {
+      animation-delay: 0.6s;
+    }
+    &:nth-child(7) {
+      animation-delay: 0.7s;
+    }
+    &:nth-child(8) {
+      animation-delay: 0.8s;
+    }
+  }
 
   button {
     margin-top: 2rem;

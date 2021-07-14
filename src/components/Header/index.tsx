@@ -10,7 +10,11 @@ interface HeaderProps {
   whiteSchema?: boolean;
 }
 
-const Header = ({ children, whiteSchema, auth = false }: HeaderProps) => {
+const Header = ({
+  children,
+  whiteSchema = false,
+  auth = false,
+}: HeaderProps) => {
   const [openMenu, setOpenMenu] = useState(false);
 
   return (
@@ -26,12 +30,13 @@ const Header = ({ children, whiteSchema, auth = false }: HeaderProps) => {
           <ResponsiveMenu
             onClick={() => setOpenMenu(!openMenu)}
             openMenu={openMenu}
+            whiteSchema={whiteSchema}
           >
             <div className="bars"></div>
             <div className="bars"></div>
             <div className="bars"></div>
           </ResponsiveMenu>
-          <ResponsiveMenuContent openMenu={openMenu}>
+          <ResponsiveMenuContent whiteSchema={whiteSchema} openMenu={openMenu}>
             {children}
           </ResponsiveMenuContent>
         </>

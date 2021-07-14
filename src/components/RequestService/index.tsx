@@ -20,50 +20,137 @@ import {
 import Input from "../Input";
 import InputNumber from "../InputNumber";
 import { useServices } from "../../providers/Services";
-import formatValue from "../../utils/formatedPrice";
 import { useAuth } from "../../providers/Auth";
-import Button from "../Button";
 import { FaTimes, FaTimesCircle } from "react-icons/fa";
 import { notification } from "antd";
+import { ServiceData } from "../../types/ServiceData";
+import FormServiceInfo from "../FormServiceInfo";
+import { useHistory } from "react-router-dom";
 
 const RequestService = () => {
   const [service, setService] = useState<string>("Limpeza Residencial");
   const [home, setHome] = useState<string>("");
   const [date, setDate] = useState("");
+  const [dateISO, setDateISO] = useState<number>(() => {
+    const now = new Date();
+
+    return now.getTime();
+  });
   const [hours, setHours] = useState("1");
   const [bedroom, setBedrooms] = useState("1");
   const [bathroom, setBathrooms] = useState("1");
+  const [address, setAddress] = useState("");
+  const [cep, setCep] = useState("");
+  const [city, setCity] = useState("");
+  const [district, setDistrict] = useState("");
+  const [uf, setUf] = useState("AC");
   const [error, setError] = useState(false);
   const [price, setPrice] = useState(0);
-  const [formatedPrice, setFormatedPrice] = useState("R$00,00");
-
   const { newService } = useServices();
-  const { idClient } = useAuth();
+  const { idClient, user } = useAuth();
   const [dateError, setDateError] = useState(false);
+  const [cepError, setCepError] = useState(false);
 
-  //apenas para deploy
-  setPrice(0);
-  setFormatedPrice(formatValue(price));
+  const serviceMaxHour: any = {
+    "Limpeza Residencial": 8,
+    Passadoria: 6,
+  };
+
+  const serviceMinHour: any = {
+    "Limpeza Residencial": 6,
+    Passadoria: 1,
+  };
+
+  const basePrice: any = {
+    Studio: 120,
+    Apartamento: 150,
+    Casa: 180,
+  };
+
+  const handleHours = (newValue: string) => {
+    newValue < hours ? setPrice(price - 20) : setPrice(price + 20);
+
+    setHours(newValue);
+  };
+
+  const handleBedrooms = (newValue: string) => {
+    newValue < bedroom ? setPrice(price - 10) : setPrice(price + 10);
+
+    setBedrooms(newValue);
+  };
+
+  const handleBathrooms = (newValue: string) => {
+    newValue < bathroom ? setPrice(price - 10) : setPrice(price + 10);
+
+    setBathrooms(newValue);
+  };
+
+  async function getAddress(value: string) {
+    let cep = value.replace(/(\d{5})(\d{3})/g, "$1-$2");
+    setCep(cep);
+
+    if (cep !== "" && cep.length === 9) {
+      cep = cep.replace(/\D/g, "");
+      const url = `https://viacep.com.br/ws/${cep}/json/unicode/`;
+
+      fetch(url)
+        .then((res) => res.json())
+        .then((address) => {
+          setAddress(address.logradouro);
+          setDistrict(address.bairro);
+          setCity(address.localidade);
+          setUf(address.uf);
+        });
+    }
+  }
+
+  const history = useHistory();
 
   const onSubmitFunction = async (e: React.MouseEvent) => {
     e.preventDefault();
 
-    const serviceFull = {
-      userId: idClient,
-      date: parseInt(date),
-      price: price,
-      serviceDetails: {
-        class: service,
-        hours: parseInt(hours),
-        type: home,
-        bedroom: parseInt(bedroom),
-        bathroom: parseInt(bathroom),
-      },
-      opened: true,
-      completed: false,
-      partnerId: 0,
-      formatedPrice: formatedPrice,
-    };
+    let serviceF: ServiceData = {} as ServiceData;
+
+    service === "Limpeza Residencial"
+      ? (serviceF = {
+          userId: idClient,
+          date: dateISO,
+          price: price,
+          serviceDetails: {
+            class: service,
+            hours: parseInt(hours),
+            type: home,
+            bedroom: parseInt(bedroom),
+            bathroom: parseInt(bathroom),
+          },
+          opened: true,
+          completed: false,
+          partnerId: 0,
+          address: address,
+          cep: cep,
+          uf: uf,
+          district: district,
+          city: city,
+          contractor: user?.name,
+        })
+      : (serviceF = {
+          userId: idClient,
+          date: dateISO,
+          price: price,
+          serviceDetails: {
+            class: service,
+            hours: parseInt(hours),
+          },
+          opened: true,
+          completed: false,
+          partnerId: 0,
+          address: address,
+          cep: cep,
+          uf: uf,
+          district: district,
+          city: city,
+          contractor: user?.name,
+        });
 
     const schema = yup.object().shape({
       date: yup.number().required("Selecione uma data"),
@@ -72,14 +159,21 @@ const RequestService = () => {
       type: yup.string(),
       bedroom: yup.number(),
       bathroom: yup.number(),
+      cep: yup.string().required("Todos os campos são obrigatórios"),
+      uf: yup.string().required("Todos os campos são obrigatórios"),
+      address: yup.string().required("Todos os campos são obrigatórios"),
+      district: yup.string().required("Todos os campos são obrigatórios"),
+      city: yup.string().required("Todos os campos são obrigatórios"),
     });
 
     await schema
-      .validate({ ...serviceFull })
+      .validate({ ...serviceF })
       .then((_) => {
-        newService(serviceFull, setError);
+        newService(serviceF, setError, history);
+        cep === "" && setCepError(true);
       })
       .catch((err) => {
+        console.log(serviceF);
         notification.open({
           message: "Erro.",
           closeIcon: <FaTimes />,
@@ -97,6 +191,14 @@ const RequestService = () => {
 
   const handleSelectChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
+    setHours("1");
+    setPrice(0);
+    if (value === "Passadoria") {
+      setHome("");
+      setPrice(80);
+    } else {
+      setHours("6");
+    }
     value && setService(value);
   };
 
@@ -105,6 +207,18 @@ const RequestService = () => {
   ) => {
     const value = event.target.value;
     value && setHome(value);
+
+    let totalPrice =
+      basePrice[value] +
+      (parseInt(bathroom) - 1) * 10 +
+      (parseInt(bedroom) - 1) * 10;
+
+    if (value === "Studio") {
+      setHours("5");
+    } else {
+      setHours("6");
+    }
+    setPrice(totalPrice);
   };
   return (
     <>
@@ -178,22 +292,23 @@ const RequestService = () => {
                 <InputNumber
                   name="bedroom"
                   value={bedroom}
-                  setValue={setBedrooms}
+                  maxValue={4}
+                  setValue={handleBedrooms}
                 ></InputNumber>
                 <InputNumberLabel>Quarto</InputNumberLabel>
               </InputNumberWrapper>
               <InputNumberWrapper>
                 <InputNumber
                   name="bedroom"
+                  maxValue={4}
                   value={bathroom}
-                  setValue={setBathrooms}
+                  setValue={handleBathrooms}
                 ></InputNumber>
                 <InputNumberLabel>Banheiro</InputNumberLabel>
               </InputNumberWrapper>
             </RoomsWrapper>
           </Column>
         )}
-
         <Column>
           <SectionTitle>Quantas Horas?</SectionTitle>
           <Subtitle>
@@ -201,12 +316,24 @@ const RequestService = () => {
           </Subtitle>
           <Row>
             <InputNumberWrapper>
-              <InputNumber
-                name="type"
-                value={hours}
-                maxValue={6}
-                setValue={setHours}
-              />
+              {home === "Studio" ? (
+                <InputNumber
+                  name="type"
+                  value={hours}
+                  maxValue={5}
+                  minValue={5}
+                  setValue={handleHours}
+                />
+              ) : (
+                <InputNumber
+                  name="type"
+                  value={hours}
+                  maxValue={serviceMaxHour[service]}
+                  minValue={serviceMinHour[service]}
+                  setValue={handleHours}
+                />
+              )}
+
               <InputNumberLabel>Horas</InputNumberLabel>
             </InputNumberWrapper>
             {service === "Passadoria" && (
@@ -215,6 +342,20 @@ const RequestService = () => {
               } peças`}</LimitPieces>
             )}
           </Row>
+        </Column>
+        <Column>
+          <Input
+            label="CEP"
+            inputType="text"
+            placeholder="00000-000"
+            errorMessage="Campo obrigatório"
+            error={cepError}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              getAddress(e.target.value);
+              setCepError(false);
+            }}
+            value={cep}
+          />
         </Column>
 
         <Column>
@@ -227,7 +368,12 @@ const RequestService = () => {
               error={dateError}
               name="date"
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setDate(e.target.value);
+                const value = e.target.valueAsDate;
+                if (value) {
+                  const date = new Date(value);
+                  setDate(e.target.value);
+                  setDateISO(date.getTime());
+                }
                 setDateError(false);
               }}
               value={date}
@@ -236,15 +382,12 @@ const RequestService = () => {
           </DateWrapper>
         </Column>
       </Container>
-
-      <Button
-        type="submit"
-        onClickFunc={(e: React.MouseEvent<HTMLButtonElement>) =>
-          onSubmitFunction(e)
-        }
-      >
-        Confirmar
-      </Button>
+      <FormServiceInfo
+        onSubmitFunction={onSubmitFunction}
+        price={price}
+        hours={hours}
+        service={service}
+      ></FormServiceInfo>
       {error && ""}
     </>
   );

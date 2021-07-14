@@ -4,6 +4,10 @@ interface TaskProps {
   past: boolean;
 }
 
+interface CalendarProps {
+  error: boolean;
+}
+
 export const Container = styled.section`
   width: 100%;
   display: flex;
@@ -48,7 +52,7 @@ export const CalendarWrapper = styled.div`
 export const Calendar = styled.div`
   width: 100%;
   min-width: 700px;
-
+  position: relative;
   display: grid;
   grid-template-columns: repeat(7, 1fr);
 `;
@@ -57,7 +61,7 @@ export const WeekDay = styled.div`
   width: 100%;
   height: 200px;
   border-right: 1px solid var(--gray);
-
+  opacity: ${(props: CalendarProps) => (props.error ? "0.2" : "1")};
   &:last-child {
     border-right: none;
   }
@@ -136,4 +140,12 @@ export const Task = styled.div`
       font-size: 0.8rem;
     }
   }
+`;
+
+export const ErrorContainer = styled.span`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1rem;
 `;
