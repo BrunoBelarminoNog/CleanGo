@@ -2,7 +2,7 @@ import styled from "styled-components";
 import imageLogin from "../../asssets/images/image-login.png";
 
 export const ContainerLogin = styled.div`
-  margin-top: -77px;
+  margin-top: -70px;
   min-height: 100vh;
   display: flex;
 

@@ -43,13 +43,15 @@ const ModalReviewService = ({ service, visible, setVisible }: ModalProps) => {
   useEffect(() => {
     setReview(false);
     setStars(0);
-    searchClient(service.partnerId);
+    if (service.partnerId !== 0) {
+      searchClient(service.partnerId);
+    }
     //eslint-disable-next-line
-  }, [visible]);
+  }, [visible, service.partnerId]);
 
   const submitReview = () => {
     const review = {
-      userId: service.userId,
+      userId: user?.partner ? service.userId : service.partnerId,
       score: stars,
       feedback: about,
     };
@@ -129,7 +131,11 @@ const ModalReviewService = ({ service, visible, setVisible }: ModalProps) => {
             )}
             {error && ""}
             <Subtitles>Endereço:</Subtitles>
-            <Adress>{`${service.address} - ${service.district},  ${service.city} - ${service.uf}, ${service.cep}`}</Adress>
+            <Adress>{`${service.address}, ${service.addressNumber} ${
+              service.complement && service?.complement
+            } - ${service.district},  ${service.city} - ${service.uf}, ${
+              service.cep
+            }`}</Adress>
             {user?.partner ? (
               <>
                 <Subtitles>Contratante:</Subtitles>

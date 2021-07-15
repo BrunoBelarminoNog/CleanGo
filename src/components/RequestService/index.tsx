@@ -16,6 +16,7 @@ import {
   LimitPieces,
   RoomsWrapper,
   DateWrapper,
+  WrapperDoubleInput,
 } from "./styles";
 import Input from "../Input";
 import InputNumber from "../InputNumber";
@@ -26,6 +27,22 @@ import { notification } from "antd";
 import { ServiceData } from "../../types/ServiceData";
 import FormServiceInfo from "../FormServiceInfo";
 import { useHistory } from "react-router-dom";
+
+interface servicesHoursElement {
+  minHour: number;
+  maxHour: number;
+}
+
+interface servicesHoursProps {
+  [Passadoria: string]: servicesHoursElement;
+  "Limpeza Residencial": servicesHoursElement;
+}
+
+interface basePriceProps {
+  [Studio: string]: number;
+  Apartamento: number;
+  Casa: number;
+}
 
 const RequestService = () => {
   const [service, setService] = useState<string>("Limpeza Residencial");
@@ -40,6 +57,8 @@ const RequestService = () => {
   const [bedroom, setBedrooms] = useState("1");
   const [bathroom, setBathrooms] = useState("1");
   const [address, setAddress] = useState("");
+  const [addressNumber, setAddressNumber] = useState("");
+  const [complement, setComplement] = useState("");
   const [cep, setCep] = useState("");
   const [city, setCity] = useState("");
   const [district, setDistrict] = useState("");
@@ -47,21 +66,22 @@ const RequestService = () => {
   const [error, setError] = useState(false);
   const [price, setPrice] = useState(0);
   const { newService } = useServices();
-  const { idClient, user } = useAuth();
+  const { user } = useAuth();
   const [dateError, setDateError] = useState(false);
   const [cepError, setCepError] = useState(false);
 
-  const serviceMaxHour: any = {
-    "Limpeza Residencial": 8,
-    Passadoria: 6,
+  const serviceHours: servicesHoursProps = {
+    Passadoria: {
+      minHour: 1,
+      maxHour: 6,
+    },
+    "Limpeza Residencial": {
+      minHour: 6,
+      maxHour: 8,
+    },
   };
 
-  const serviceMinHour: any = {
-    "Limpeza Residencial": 6,
-    Passadoria: 1,
-  };
-
-  const basePrice: any = {
+  const basePrice: basePriceProps = {
     Studio: 120,
     Apartamento: 150,
     Casa: 180,
@@ -105,6 +125,7 @@ const RequestService = () => {
   }
 
   const history = useHistory();
+  const idUser = localStorage.getItem("@CleanGo/idClient") || "0";
 
   const onSubmitFunction = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -113,7 +134,7 @@ const RequestService = () => {
 
     service === "Limpeza Residencial"
       ? (serviceF = {
-          userId: idClient,
+          userId: parseInt(idUser),
           date: dateISO,
           price: price,
           serviceDetails: {
@@ -126,7 +147,9 @@ const RequestService = () => {
           opened: true,
           completed: false,
           partnerId: 0,
+          complement: complement,
           address: address,
+          addressNumber: addressNumber,
           cep: cep,
           uf: uf,
           district: district,
@@ -134,7 +157,7 @@ const RequestService = () => {
           contractor: user?.name,
         })
       : (serviceF = {
-          userId: idClient,
+          userId: parseInt(idUser),
           date: dateISO,
           price: price,
           serviceDetails: {
@@ -145,6 +168,8 @@ const RequestService = () => {
           completed: false,
           partnerId: 0,
           address: address,
+          complement: complement,
+          addressNumber: addressNumber,
           cep: cep,
           uf: uf,
           district: district,
@@ -159,6 +184,8 @@ const RequestService = () => {
       type: yup.string(),
       bedroom: yup.number(),
       bathroom: yup.number(),
+      addressNumber: yup.string().required("Todos os campos são obrigatórios"),
+      complement: yup.string(),
       cep: yup.string().required("Todos os campos são obrigatórios"),
       uf: yup.string().required("Todos os campos são obrigatórios"),
       address: yup.string().required("Todos os campos são obrigatórios"),
@@ -173,7 +200,6 @@ const RequestService = () => {
         cep === "" && setCepError(true);
       })
       .catch((err) => {
-        console.log(serviceF);
         notification.open({
           message: "Erro.",
           closeIcon: <FaTimes />,
@@ -198,6 +224,8 @@ const RequestService = () => {
       setPrice(80);
     } else {
       setHours("6");
+      setBathrooms("1");
+      setBedrooms("1");
     }
     value && setService(value);
   };
@@ -328,8 +356,8 @@ const RequestService = () => {
                 <InputNumber
                   name="type"
                   value={hours}
-                  maxValue={serviceMaxHour[service]}
-                  minValue={serviceMinHour[service]}
+                  maxValue={serviceHours[service].maxHour}
+                  minValue={serviceHours[service].minHour}
                   setValue={handleHours}
                 />
               )}
@@ -356,6 +384,28 @@ const RequestService = () => {
             }}
             value={cep}
           />
+          <WrapperDoubleInput>
+            <Input
+              label="Número"
+              inputType="text"
+              placeholder="Número"
+              errorMessage="Campo obrigatório"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setAddressNumber(e.target.value);
+              }}
+              value={addressNumber}
+            />
+            <Input
+              label="Complemento"
+              inputType="text"
+              placeholder="Apartameto / Bloco"
+              errorMessage="Campo obrigatório"
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setComplement(e.target.value);
+              }}
+              value={complement}
+            />
+          </WrapperDoubleInput>
         </Column>
 
         <Column>

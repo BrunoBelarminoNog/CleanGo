@@ -106,7 +106,17 @@ export const FeedbackProvider = ({ children }: FeedbackProviderProps) => {
         },
       })
       .then(() => {
-        console.log("Feedback deletado com sucesso");
+        notification.open({
+          message: "Sucesso",
+          closeIcon: <FaTimes />,
+          style: {
+            fontFamily: "Roboto",
+            backgroundColor: "var(--gray)",
+            WebkitBorderRadius: 4,
+          },
+          description: "Feedback apagado com sucesso!",
+          icon: <FaCheckCircle style={{ color: "green" }} />,
+        });
       })
       .catch((err: AxiosError) => {
         notification.open({
@@ -126,7 +136,17 @@ export const FeedbackProvider = ({ children }: FeedbackProviderProps) => {
         },
       })
       .then(() => {
-        console.log("Feedback editado com sucesso");
+        notification.open({
+          message: "Sucesso",
+          closeIcon: <FaTimes />,
+          style: {
+            fontFamily: "Roboto",
+            backgroundColor: "var(--gray)",
+            WebkitBorderRadius: 4,
+          },
+          description: "Feedback editado com sucesso!",
+          icon: <FaCheckCircle style={{ color: "green" }} />,
+        });
       })
       .catch((err: AxiosError) => {
         notification.open({

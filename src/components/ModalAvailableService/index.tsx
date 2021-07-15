@@ -34,8 +34,12 @@ const ModalAvailableService = ({
   const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
-    searchClient(service.userId);
-  });
+    if (service.userId !== 0) {
+      searchClient(service.userId);
+    }
+    // eslint-disable-next-line
+  }, [service.userId]);
+
   const handleAccept = () => {
     acceptService(
       {
@@ -75,7 +79,11 @@ const ModalAvailableService = ({
         )}
         {error && ""}
         <Subtitles>Endereço:</Subtitles>
-        <Adress>{`${service.address} - ${service.district},  ${service.city} - ${service.uf}, ${service.cep}`}</Adress>
+        <Adress>{`${service.address}, ${service.addressNumber} ${
+          service.complement && service?.complement
+        } - ${service.district},  ${service.city} - ${service.uf}, ${
+          service.cep
+        }`}</Adress>
         <Subtitles>Contratante:</Subtitles>
         <GeneralInfo>{client.name}</GeneralInfo>
         <ContainerRow>

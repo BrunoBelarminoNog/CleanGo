@@ -19,6 +19,7 @@ export const HeaderBar = styled.header`
   align-items: center;
   justify-content: space-between;
   background: transparent;
+  overflow: hidden;
 
   img {
     transition: all 350ms;

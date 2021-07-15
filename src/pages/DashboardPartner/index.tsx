@@ -1,4 +1,4 @@
-import { Switch } from "react-router-dom";
+import { Switch, Redirect } from "react-router-dom";
 import Route from "../../routes/route";
 import Aside from "../../components/Aside";
 import Main from "./Main";
@@ -13,8 +13,10 @@ import { useTheme } from "../../providers/Theme";
 import { useEffect } from "react";
 
 import TitlePage from "../../components/TitlePage";
+import { useAuth } from "../../providers/Auth";
 const Dashboard = () => {
   const { handleBackground } = useTheme();
+  const { token } = useAuth();
 
   useEffect(() => {
     handleBackground(true);
@@ -31,7 +33,11 @@ const Dashboard = () => {
       </Header>
       <Aside />
       <Switch>
-        <Route isPrivate path="/dashboardparceiro/" exact component={Main} />
+        {token ? (
+          <Route isPrivate path="/dashboardparceiro" exact component={Main} />
+        ) : (
+          <Redirect to="/" />
+        )}{" "}
         <Route isPrivate path="/dashboardparceiro/receita" component={Gains} />
         <Route
           isPrivate

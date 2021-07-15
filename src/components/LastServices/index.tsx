@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
 import { ServiceData } from "../../types/ServiceData";
 import ModalReviewService from "../ModalReviewService";
 import formatValue from "../../utils/formatedPrice";
@@ -38,11 +37,6 @@ const TableRowElement = ({ service }: TableRowElementProps) => {
 };
 
 const LastServices = ({ services }: LastServicesProps) => {
-  useEffect(() => {
-    console.log(services);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [services]);
-
   return (
     <Container>
       <h2>Últimos serviços</h2>

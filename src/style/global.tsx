@@ -46,6 +46,22 @@ time, mark, audio, video {
         props.backgroundGray ? "var(--light-gray)" : "var(--white)"};
       font-family: var(--font-standard);
       padding-top: 56px;
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: linear-gradient(13deg, #bec9bd 14%, #919990 64%);
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(13deg, #546652 14%, #313630 64%);
+  }
+  ::-webkit-scrollbar-track {
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: inset 8.2px 10px 12px 0px #f0f0f0;
+  }
     }    
   
     h1, h2, h3, h4, h5, h6, strong {

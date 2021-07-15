@@ -10,10 +10,12 @@ const Aside = () => {
   const navLinks = useRef<HTMLAnchorElement[]>([]);
   const [topIndicator, setTopIndicator] = useState("0");
   const [leftIndicator, setLeftIndicator] = useState("-4px");
+  const [hovered, setHovered] = useState(false);
   const indicator = useRef<HTMLSpanElement>(null);
   const { user } = useAuth();
+
   const getDimensions = () => {
-    navLinks.current.forEach((item: HTMLElement) => {
+    navLinks.current.forEach((item: HTMLAnchorElement) => {
       if (item?.className === "navlink--active") {
         const top = item.offsetTop;
         const left = item.offsetLeft;
@@ -24,6 +26,9 @@ const Aside = () => {
   };
 
   useEffect(() => {
+    setHovered(false);
+    getDimensions();
+
     let timeoutId: NodeJS.Timeout;
 
     const resizeListener = () => {
@@ -31,7 +36,6 @@ const Aside = () => {
       timeoutId = setTimeout(() => getDimensions(), 150);
     };
 
-    resizeListener();
     window.onresize = () => {
       resizeListener();
     };
@@ -46,7 +50,11 @@ const Aside = () => {
   }, [pathname]);
 
   return (
-    <AsideContainer>
+    <AsideContainer
+      className={hovered ? "hovered" : ""}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
       <Logo src={LogoWhite} alt="Logo"></Logo>
       <div>
         <MenuWrapper

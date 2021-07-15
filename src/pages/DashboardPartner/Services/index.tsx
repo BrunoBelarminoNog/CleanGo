@@ -40,12 +40,11 @@ const Services = () => {
 
   useEffect(() => {
     getServices(setError, pageNumber, 12);
-    console.log(pageNumber);
     if (pageNumber === 1) {
       setDisablePrev(true);
     }
     // eslint-disable-next-line
-  }, [pageNumber]);
+  }, [pageNumber, services]);
   return (
     <Container>
       <ContainerSelect>
