@@ -138,9 +138,9 @@ const ModalOpenService = ({ service, visible, setVisible }: ModalProps) => {
             }`}</Adress>
             <Subtitles>Contratado:</Subtitles>
             <GeneralInfo>{client.name}</GeneralInfo>
+            <Subtitles>Data:</Subtitles>
+            <GeneralInfo>{format(service.date, "dd MMM yyyy")}</GeneralInfo>
             <ContainerRow>
-              <Subtitles>Data:</Subtitles>
-              <GeneralInfo>{format(service.date, "dd MMM yyyy")}</GeneralInfo>
               <ContainerInfo>
                 <Subtitles>Duração total:</Subtitles>
                 <GeneralInfo className="hours">
