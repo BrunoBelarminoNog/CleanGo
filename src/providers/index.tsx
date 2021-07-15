@@ -5,6 +5,7 @@ import { FeedbackProvider } from "./Feedbacks";
 import { ServiceProvider } from "./Services";
 import { ThemeProvider } from "./Theme";
 import { PartnersProvider } from "./Partners";
+import { FeedProvider } from "./Feed";
 interface ProvidersProps {
   children: ReactNode;
 }
@@ -15,7 +16,9 @@ const Providers = ({ children }: ProvidersProps) => {
         <ClientProvider>
           <FeedbackProvider>
             <ServiceProvider>
-              <PartnersProvider>{children}</PartnersProvider>
+              <PartnersProvider>
+                <FeedProvider>{children}</FeedProvider>
+              </PartnersProvider>
             </ServiceProvider>
           </FeedbackProvider>
         </ClientProvider>

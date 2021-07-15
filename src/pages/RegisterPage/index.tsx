@@ -52,7 +52,7 @@ const RegisterPage = () => {
 
   return (
     <>
-      <TitlePage />
+      <TitlePage title="Cadastro" />
       <Header>
         <HeaderNav />
       </Header>

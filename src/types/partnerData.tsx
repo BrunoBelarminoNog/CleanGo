@@ -14,6 +14,7 @@ export interface UserData {
   phone: string;
   city: string;
   services: Array<string>[];
+  id?: number;
 }
 
 export interface PartnerData {
@@ -33,6 +34,7 @@ export interface PartnerData {
   city?: string;
   about?: string;
   service?: string;
+  id?: number;
 }
 
 export interface FeedData {

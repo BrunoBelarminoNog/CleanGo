@@ -20,30 +20,18 @@ const responsive = {
 const AvailableServices = () => {
   const { getServices, services } = useServices();
   const [error, setError] = useState(false);
-  const [items, setItems] = useState<JSX.Element[]>();
 
   useEffect(() => {
-    getServices(setError);
-  }, [getServices]);
-
-  useEffect(() => {
-    if (services && services.length > 0) {
-      const itens = services.map((service) => (
-        <div>
-          <CardService service={service} />
-        </div>
-      ));
-
-      setItems(itens);
-    } else {
-      setError(true);
+    if (!services || services.length === 0) {
+      getServices(setError);
     }
-  }, [services]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <Container>
       <h2>Serviços disponíveis</h2>
-      {error ? (
+      {services.length === 0 || error ? (
         <h3>Não há serviços em aberto</h3>
       ) : (
         <SliderWrapper>
@@ -51,7 +39,9 @@ const AvailableServices = () => {
             mouseTracking
             disableDotsControls
             responsive={responsive}
-            items={items}
+            items={services.map((service) => (
+              <CardService service={service} />
+            ))}
             paddingLeft={20}
             paddingRight={20}
           />

@@ -29,7 +29,7 @@ const EnterPage = () => {
 
   return (
     <>
-      <TitlePage />
+      <TitlePage title="Entrar" />
       <Header>
         <HeaderNav />
       </Header>

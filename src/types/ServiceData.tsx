@@ -1,5 +1,6 @@
 export interface ServiceData {
   userId: number;
+  contractor?: string;
   date: number;
   price: number;
   serviceDetails: {
@@ -14,9 +15,14 @@ export interface ServiceData {
   partnerId: number;
   formatedPrice?: string;
   id?: number;
+  address: string;
+  cep: string;
+  uf: string;
+  district: string;
+  city: string;
 }
 export interface AcceptService {
-  partnerId: number;
+  partnerId: number | undefined;
   opened: boolean;
-  serviceId: number;
+  serviceId: number | undefined;
 }

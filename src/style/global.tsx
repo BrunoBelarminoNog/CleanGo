@@ -37,13 +37,15 @@ time, mark, audio, video {
     padding: 0;
     box-sizing: border-box;
     outline: 0;
+    scroll-behavior: smooth;
+
    }
   
    body {
       background: ${(props: GlobalProps) =>
         props.backgroundGray ? "var(--light-gray)" : "var(--white)"};
       font-family: var(--font-standard);
-      padding-top: 77px;
+      padding-top: 56px;
     }    
   
     h1, h2, h3, h4, h5, h6, strong {
@@ -57,5 +59,12 @@ time, mark, audio, video {
     a, li {
       list-style: none;
       text-decoration: none;
+    }
+
+    @media screen and (min-width: 920px) {
+      body {
+        padding-top: 70px;
+      }
+
     }
   `;

@@ -24,7 +24,7 @@ const Dashboard = () => {
 
   return (
     <>
-      <TitlePage />
+      <TitlePage title="Dashboard Empregado" />
 
       <Header auth={true}>
         <HeaderNavAuth name={"Mockado"} />

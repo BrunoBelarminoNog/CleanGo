@@ -18,22 +18,6 @@ function FormLogin() {
   const { userLogin } = useAuth();
   const [load, setLoad] = useState<boolean>(false);
 
-  // const FormEl = useRef<React.MutableRefObject<HTMLDivElement | null>[]>([]);
-
-  // useLayoutEffect(() => {
-  //   const tl = gsap.timeline();
-
-  //   console.log(FormEl);
-
-  //   tl.from(FormEl?.current, {
-  //     translateY: -40,
-  //     opacity: 0,
-  //     stagger: {
-  //       amount: 0.4,
-  //     },
-  //   });
-  // }, []);
-
   const schema = yup.object().shape({
     email: yup.string().required("Campo obrigatório"),
     password: yup

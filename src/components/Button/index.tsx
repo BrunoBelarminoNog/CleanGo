@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { ButtonItem } from "./styles";
 
-interface ButtonProps {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   onClickFunc?: (e: React.MouseEvent<HTMLButtonElement>) => void;
   whiteSchema?: boolean;
   children: ReactNode;

@@ -2,14 +2,22 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   font-family: "Lato";
-  padding: 1.6rem;
   background-color: var(--white);
-  width: 50%;
   display: flex;
   flex-direction: column;
-  gap: 1.6rem;
   border-radius: 4px;
-  min-width: 550px;
+  padding: 1rem;
+  width: 90%;
+  z-index: 1;
+  @media screen and (min-width: 720px) {
+    width: 60%;
+  }
+  @media screen and (min-width: 860px) {
+    min-width: 360px;
+    gap: 1.6rem;
+    padding: 1.6rem;
+    width: 50%;
+  }
 `;
 
 export const Row = styled.div`
@@ -18,11 +26,32 @@ export const Row = styled.div`
   gap: 0.7rem;
 `;
 
+export const RoomsWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  @media screen and (min-width: 440px) {
+    gap: 2rem;
+    flex-direction: row;
+  }
+`;
+
 export const InputNumberWrapper = styled.div`
-  width: 150px;
+  width: 180px;
+  > div {
+    width: 85px;
+  }
   display: flex;
   align-items: center;
+  justify-content: flex-start;
+
   gap: 5px;
+  @media screen and (min-width: 440px) {
+    width: 150px;
+  }
 `;
 
 export const InputNumberLabel = styled.label`
@@ -48,14 +77,20 @@ export const Column = styled.div`
 
 export const Title = styled.h1`
   font-family: "Oswald";
-  font-size: 28px;
+  font-size: 16px;
   color: var(--dark-green);
+  @media screen and (min-width: 720px) {
+    font-size: 28px;
+  }
 `;
 
 export const Subtitle = styled.span`
   font-family: "Lato";
-  font-size: 16px;
+  font-size: 12px;
   color: var(--dark-gray);
+  @media screen and (min-width: 720px) {
+    font-size: 16px;
+  }
 `;
 
 export const Border = styled.div`
@@ -81,27 +116,30 @@ export const SectionTitle = styled.h3`
 `;
 
 export const LimitPieces = styled.div`
-  font-size: 18px;
+  font-size: 12px;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 186px;
+  width: 250px;
   height: 46px;
   background-color: var(--green);
   color: var(--white);
   border-radius: 4px;
-  margin-left: 4rem;
-`;
-
-export const RoomsWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 2rem;
+  margin-left: 0;
+  @media screen and (min-width: 380px) {
+  margin-left: 2rem;
+  }
+  @media screen and (min-width: 440px) {
+    font-size: 18px;
+    width: 186px;
+    margin-left: 3rem;
+  }
 `;
 
 export const DateWrapper = styled.div`
-  width: 35%;
+  width: 100%;
+  @media screen and (min-width: 440px) {
+    width: 240px;
+  }
 `;

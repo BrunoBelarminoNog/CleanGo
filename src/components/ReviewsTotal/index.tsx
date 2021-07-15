@@ -3,7 +3,7 @@ import { Container } from "./styles";
 import { FaStar } from "react-icons/fa";
 
 interface ReviewsTotalProps {
-  total: number;
+  total: string;
 }
 
 const ReviewsTotal = ({ total }: ReviewsTotalProps) => {

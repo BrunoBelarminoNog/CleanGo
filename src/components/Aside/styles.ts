@@ -3,8 +3,8 @@ import styled, { keyframes } from "styled-components";
 interface IndicatorProps {
   leftIndicator: string;
   topIndicator: string;
+  isPartner: boolean | undefined;
 }
-
 const appearFromNowhere = keyframes`
 from{
     opacity: 0;
@@ -69,7 +69,8 @@ export const MenuWrapper = styled.nav`
   height: 75%;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: ${(props: IndicatorProps) =>
+    props.isPartner ? "space-between" : "space-evenly"};
   position: relative;
   padding-right: 8px;
 

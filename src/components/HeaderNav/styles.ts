@@ -1,6 +1,10 @@
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
+interface LinksProps {
+  whiteSchema: boolean;
+}
+
 export const Container = styled.div`
   display: flex;
   width: 100%;
@@ -9,7 +13,7 @@ export const Container = styled.div`
   justify-content: flex-end;
   padding: 97px 1rem;
 
-  @media screen and (min-width: 840px) {
+  @media screen and (min-width: 920px) {
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -32,7 +36,9 @@ export const Links = styled(NavLink)`
     color: var(--green);
   }
 
-  @media screen and (min-width: 840px) {
+  @media screen and (min-width: 920px) {
+    color: ${(props: LinksProps) =>
+      props.whiteSchema ? "var(--white)" : "var(--black)"};
     margin-bottom: 0px;
     padding-bottom: 0;
     border-bottom: none;
@@ -44,15 +50,25 @@ export const Links = styled(NavLink)`
 `;
 
 export const BtnLink = styled(NavLink)`
-  background-color: var(--green);
   color: var(--white);
+  background-color: var(--green);
   border-radius: 4px;
-  padding: 6px 8px;
+  padding: 6px 18px;
   font-size: 1.1rem;
   font-weight: 500;
   margin-top: 1rem;
+  transition: all 350ms;
 
-  @media screen and (min-width: 840px) {
+  &:hover {
+    color: var(--white);
+    background-color: var(--dark-green);
+  }
+
+  @media screen and (min-width: 920px) {
     margin-top: 0rem;
+    color: ${(props: LinksProps) =>
+      props.whiteSchema ? "var(--dark-green)" : "var(--white)"};
+    background-color: ${(props: LinksProps) =>
+      props.whiteSchema ? "var(--gray)" : "var(--green)"};
   }
 `;

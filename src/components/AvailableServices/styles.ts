@@ -15,7 +15,7 @@ export const Container = styled.section`
     color: var(--dark-gray);
     font-weight: 500;
     text-align: left;
-    padding: 0.5rem 0;
+    padding: 0.5rem;
   }
 
   > h3 {

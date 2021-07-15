@@ -51,11 +51,23 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   //  login de cliente
-  const token = localStorage.getItem("@CleanGo/token") || "";
-  const [auth, setAuth] = useState<string>(token);
-  const [user, setUser] = useState<PartnerData | ClientData>(
-    {} as PartnerData | ClientData
-  );
+  const [auth, setAuth] = useState<string>(() => {
+    let token = localStorage.getItem("@CleanGo/token");
+
+    if (token) {
+      return JSON.parse(token);
+    }
+    return "";
+  });
+  const [user, setUser] = useState<PartnerData | ClientData>(() => {
+    let userStorage = localStorage.getItem("@CleanGo/user");
+
+    if (userStorage) {
+      return JSON.parse(userStorage);
+    }
+    return {} as PartnerData | ClientData;
+  });
+
   const [idClient, setIdClient] = useState<number>(0);
 
   const getUser = (
@@ -72,6 +84,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       })
       .then((response) => {
         setUser(response.data);
+        localStorage.setItem("@CleanGo/user", JSON.stringify(response.data));
 
         notification.open({
           message: "Sucesso",
@@ -114,7 +127,10 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       .post("login", clientData)
       .then((response) => {
         console.log("Entrou na aplicação");
-        localStorage.setItem("@CleanGo/token", response.data.accessToken);
+        localStorage.setItem(
+          "@CleanGo/token",
+          JSON.stringify(response.data.accessToken)
+        );
         const decodedToken: DecodeToken = jwt_decode(response.data.accessToken);
         localStorage.setItem("@CleanGo/idClient", decodedToken.sub);
         setIdClient(convertStringToNumber(decodedToken.sub));
@@ -144,6 +160,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setIdClient(0);
     localStorage.removeItem("@CleanGo/token");
     localStorage.removeItem("@CleanGo/idClient");
+    localStorage.removeItem("@CleanGo/user");
 
     history.push("/");
   };
