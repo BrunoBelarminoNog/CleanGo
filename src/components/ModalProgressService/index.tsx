@@ -28,19 +28,20 @@ interface ModalProps {
   setVisible: Dispatch<SetStateAction<boolean>>;
   service: ServiceData;
 }
-const ModalOpenService = ({ service, visible, setVisible }: ModalProps) => {
+const ModalProgressService = ({ service, visible, setVisible }: ModalProps) => {
   const [error, setError] = useState<boolean>(false);
-  const [completed] = useState<boolean>(false);
+  const [completed, setCompleted] = useState<boolean>(false);
   const [stars, setStars] = useState(0);
   const [about, setAbout] = useState("");
   const [aboutError, setAboutError] = useState(false);
 
   const { searchClient, client } = useClients();
   const { newFeedback } = useFeedback();
-  const { deleteService } = useServices();
+  const { finishService } = useServices();
 
-  const handleCancel = () => {
-    deleteService(setError, service?.id, setVisible);
+  const handleCompleted = () => {
+    finishService(true, setError, service?.id, setVisible);
+    setCompleted(true);
     // setVisible(!visible);
   };
 
@@ -72,7 +73,7 @@ const ModalOpenService = ({ service, visible, setVisible }: ModalProps) => {
       footer={null}
       closeIcon={<CloseIcon />}
       width={600}
-      title={completed ? "Avaliar serviço" : "Serviço em aberto"}
+      title={completed ? "Avaliar serviço" : "Serviço em andamento"}
       okText="Criar"
       cancelText="Cancelar"
     >
@@ -150,13 +151,13 @@ const ModalOpenService = ({ service, visible, setVisible }: ModalProps) => {
                   {formatValue(service.price)}
                 </GeneralInfo>
               </ContainerInfo>
-              <Button onClickFunc={handleCancel}>Cancelar</Button>
+              <Button onClickFunc={handleCompleted}>Concluído</Button>
             </ContainerRow>
-            <Button onClickFunc={handleCancel}>Cancelar</Button>
+            <Button onClickFunc={handleCompleted}>Concluído</Button>
           </>
         )}
       </ContainerInfo>
     </CustomModal>
   );
 };
-export default ModalOpenService;
+export default ModalProgressService;

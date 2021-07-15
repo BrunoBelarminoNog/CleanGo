@@ -2,7 +2,7 @@ import styled from "styled-components";
 import imageRegister from "../../asssets/images/image-register.png";
 
 export const ContainerRegister = styled.div`
-  margin-top: -77px;
+  margin-top: -70px;
   min-height: 100vh;
   display: flex;
   #description {
@@ -37,7 +37,7 @@ export const ContainerDescription = styled.div`
 
   img {
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     width: 100%;
     height: 100vh;

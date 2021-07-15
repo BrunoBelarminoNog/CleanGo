@@ -41,7 +41,7 @@ export const AsideContainer = styled.aside`
 
     width: 128px;
 
-    :hover {
+    &.hovered {
       width: 300px;
       span {
         padding-left: 12px;

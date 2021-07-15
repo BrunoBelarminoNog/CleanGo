@@ -24,7 +24,6 @@ const Services = () => {
       let month = now.getMonth();
       const servicesFiltered = clientServices.filter((service) => {
         let date = new Date(service.date);
-        console.log(new Date(service.date));
         return date.getMonth() === month;
       });
 

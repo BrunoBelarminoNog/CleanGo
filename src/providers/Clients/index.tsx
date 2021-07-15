@@ -6,7 +6,7 @@ import { useAuth } from "../Auth";
 import { notification } from "antd";
 import { FaCheckCircle, FaTimes, FaTimesCircle } from "react-icons/fa";
 import { useState } from "react";
-import { AxiosResponse } from "axios";
+import { AxiosError, AxiosResponse } from "axios";
 
 interface ClientProviderProps {
   children: ReactNode;
@@ -93,7 +93,7 @@ export const ClientProvider = ({ children }: ClientProviderProps) => {
           Authorization: "Bearer " + token,
         },
       })
-      .then((response) =>
+      .then((response: AxiosResponse) =>
         notification.open({
           message: "Sucesso",
           closeIcon: <FaTimes />,
@@ -106,7 +106,18 @@ export const ClientProvider = ({ children }: ClientProviderProps) => {
           icon: <FaCheckCircle style={{ color: "green" }} />,
         })
       )
-      .catch((err) => console.log(err));
+      .catch((err: AxiosError) => {
+        notification.open({
+          message: "Erro",
+          closeIcon: <FaTimes />,
+          style: {
+            WebkitBorderRadius: 4,
+          },
+          description:
+            "Erro ao editar cadastro. Verifique sua conexão e tente novamente.",
+          icon: <FaTimesCircle style={{ color: "red" }} />,
+        });
+      });
   };
   const searchClient = (idClient: number) => {
     api
@@ -116,10 +127,20 @@ export const ClientProvider = ({ children }: ClientProviderProps) => {
         },
       })
       .then((response) => {
-        console.log(response.data);
         setClient(response.data);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        notification.open({
+          message: "Erro",
+          closeIcon: <FaTimes />,
+          style: {
+            WebkitBorderRadius: 4,
+          },
+          description:
+            "Erro ao pesquisar. Verifique sua conexão e tente novamente.",
+          icon: <FaTimesCircle style={{ color: "red" }} />,
+        });
+      });
   };
 
   const getAllClients = () => {
@@ -130,7 +151,17 @@ export const ClientProvider = ({ children }: ClientProviderProps) => {
         },
       })
       .then((response: AxiosResponse) => setClients([...response.data]))
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        notification.open({
+          message: "Erro",
+          closeIcon: <FaTimes />,
+          style: {
+            WebkitBorderRadius: 4,
+          },
+          description: "Erro. Verifique sua conexão e tente novamente.",
+          icon: <FaTimesCircle style={{ color: "red" }} />,
+        });
+      });
   };
   const deleteClient = (idClient: number) => {
     api
@@ -139,8 +170,31 @@ export const ClientProvider = ({ children }: ClientProviderProps) => {
           Authorization: "Bearer " + token,
         },
       })
-      .then((response) => console.log(response.status))
-      .catch((err) => console.log(err));
+      .then((response) => {
+        notification.open({
+          message: "Sucesso",
+          closeIcon: <FaTimes />,
+          style: {
+            fontFamily: "Roboto",
+            backgroundColor: "var(--gray)",
+            WebkitBorderRadius: 4,
+          },
+          description: "Sucesso ao deletar.",
+          icon: <FaCheckCircle style={{ color: "green" }} />,
+        });
+      })
+      .catch((err) => {
+        notification.open({
+          message: "Erro",
+          closeIcon: <FaTimes />,
+          style: {
+            WebkitBorderRadius: 4,
+          },
+          description:
+            "Erro ao excluir. Verifique sua conexão e tente novamente.",
+          icon: <FaTimesCircle style={{ color: "red" }} />,
+        });
+      });
   };
 
   return (

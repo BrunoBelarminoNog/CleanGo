@@ -2,16 +2,16 @@ import { ServiceData } from "../../types/ServiceData";
 import { Container } from "./styles";
 import formatValue from "../../utils/formatedPrice";
 import { useState } from "react";
-import ModalOpenService from "../ModalOpenService";
+import ModalProgressService from "../ModalProgressService";
 
 interface CardProps {
   service: ServiceData;
 }
-const CardServiceOpen = ({ service }: CardProps) => {
+const CardServiceProgress = ({ service }: CardProps) => {
   const [visible, setVisible] = useState<boolean>(false);
   return (
     <Container onClick={() => setVisible(!visible)}>
-      <ModalOpenService
+      <ModalProgressService
         service={service}
         visible={visible}
         setVisible={setVisible}
@@ -31,4 +31,4 @@ const CardServiceOpen = ({ service }: CardProps) => {
     </Container>
   );
 };
-export default CardServiceOpen;
+export default CardServiceProgress;

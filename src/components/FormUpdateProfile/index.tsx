@@ -54,7 +54,6 @@ const FormUpdateProfile = () => {
       fetch(url)
         .then((res) => res.json())
         .then((address) => {
-          console.log(address);
           setAddress(address.logradouro);
           setDistrict(address.bairro);
           setCity(address.localidade);

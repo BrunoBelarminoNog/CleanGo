@@ -18,7 +18,7 @@ export const Container = styled.div`
     css`
       &::after {
         content: "";
-        position: absolute;
+        position: fixed;
         bottom: 0px;
         right: 0px;
         width: 392px;

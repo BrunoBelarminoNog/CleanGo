@@ -16,6 +16,8 @@ export interface ServiceData {
   formatedPrice?: string;
   id?: number;
   address: string;
+  addressNumber: string;
+  complement?: string;
   cep: string;
   uf: string;
   district: string;

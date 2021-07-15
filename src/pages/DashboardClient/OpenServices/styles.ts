@@ -37,11 +37,13 @@ export const Container = styled.div`
   align-content: center;
   justify-items: center;
   align-items: center;
-  margin-bottom: 80px;
+  margin-bottom: 100px;
+  padding: 0 1rem;
 
   @media only screen and (min-width: 720px) {
     margin-left: 128px;
     margin-bottom: 0px;
+    padding: 0 2rem;
   }
 `;
 export const InputSearch = styled(Input)`

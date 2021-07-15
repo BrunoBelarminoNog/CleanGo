@@ -50,7 +50,11 @@ const ModalDetailsService = ({ service, visible, setVisible }: ModalProps) => {
           </>
         )}
         <Subtitles>Endereço:</Subtitles>
-        <Adress>{`${service.address} - ${service.district},  ${service.city} - ${service.uf}, ${service.cep}`}</Adress>
+        <Adress>{`${service.address}, ${service.addressNumber} ${
+          service.complement && service?.complement
+        } - ${service.district},  ${service.city} - ${service.uf}, ${
+          service.cep
+        }`}</Adress>
         <Subtitles>Contratante:</Subtitles>
         <GeneralInfo>{service.contractor}</GeneralInfo>
         <ContainerRow>

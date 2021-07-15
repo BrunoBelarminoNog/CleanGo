@@ -32,8 +32,10 @@ export const ContainerInner = styled(Container)`
   align-items: center;
   border: 4px solid var(--dark-green);
   border-radius: 16px;
+  width: 100%;
   max-width: 280px;
   height: 300px;
+
   .cardTitle {
     grid-area: title;
     font-family: var(--font-secondary);
@@ -41,7 +43,8 @@ export const ContainerInner = styled(Container)`
     align-self: flex-start;
     margin: 0;
   }
-  img {
+
+  svg {
     border: 4px solid var(--dark-green);
     border-radius: 50%;
     padding: 20px;
@@ -53,7 +56,17 @@ export const ContainerInner = styled(Container)`
     position: absolute;
     right: -30px;
     top: -30px;
+    transition: all 300ms;
   }
+
+  &:hover svg {
+    background-color: var(--green);
+
+    path {
+      fill: var(--white);
+    }
+  }
+
   p {
     grid-area: text;
     font-family: var(--font-standard);

@@ -1,9 +1,11 @@
+import { notification } from "antd";
 import { AxiosError, AxiosResponse } from "axios";
 import { SetStateAction, useState } from "react";
 import { useEffect } from "react";
 import { Dispatch } from "react";
 import { ReactNode, useContext } from "react";
 import { createContext } from "react";
+import { FaTimes, FaTimesCircle } from "react-icons/fa";
 import api from "../../services/api";
 import { FeedData, Likes } from "../../types/feedData";
 import { useAuth } from "../Auth";
@@ -33,9 +35,17 @@ export const FeedProvider = ({ children }: ProviderProps) => {
         },
       })
       .then((res: AxiosResponse) => setFeeds(res.data))
-      .catch((err: AxiosError) =>
-        console.log("feed erro, ", err.response?.data)
-      );
+      .catch((err: AxiosError) => {
+        notification.open({
+          message: "Erro",
+          closeIcon: <FaTimes />,
+          style: {
+            WebkitBorderRadius: 4,
+          },
+          description: "Verifique sua conexão e tente novamente.",
+          icon: <FaTimesCircle style={{ color: "red" }} />,
+        });
+      });
   };
 
   useEffect(() => {
@@ -53,7 +63,17 @@ export const FeedProvider = ({ children }: ProviderProps) => {
         },
       })
       .then((res: AxiosResponse) => setFeeds([...feeds, feedData]))
-      .catch((err: AxiosError) => console.log(err.response));
+      .catch((err: AxiosError) => {
+        notification.open({
+          message: "Erro",
+          closeIcon: <FaTimes />,
+          style: {
+            WebkitBorderRadius: 4,
+          },
+          description: "Verifique sua conexão e tente novamente.",
+          icon: <FaTimesCircle style={{ color: "red" }} />,
+        });
+      });
   };
 
   const feedLike = (feedId: number, feedData: Likes) => {
@@ -64,7 +84,17 @@ export const FeedProvider = ({ children }: ProviderProps) => {
         },
       })
       .then(() => callFeed())
-      .catch((err: AxiosError) => console.log("Like err", err.response));
+      .catch((err: AxiosError) => {
+        notification.open({
+          message: "Erro",
+          closeIcon: <FaTimes />,
+          style: {
+            WebkitBorderRadius: 4,
+          },
+          description: "Verifique sua conexão e tente novamente.",
+          icon: <FaTimesCircle style={{ color: "red" }} />,
+        });
+      });
   };
 
   return (

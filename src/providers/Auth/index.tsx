@@ -12,6 +12,7 @@ import { PartnerData } from "../../types/partnerData";
 import { ClientData } from "../../types/clientData";
 import { notification } from "antd";
 import { FaCheckCircle, FaTimes, FaTimesCircle } from "react-icons/fa";
+import { AxiosError, AxiosResponse } from "axios";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -125,8 +126,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   ) => {
     api
       .post("login", clientData)
-      .then((response) => {
-        console.log("Entrou na aplicação");
+      .then((response: AxiosResponse) => {
         localStorage.setItem(
           "@CleanGo/token",
           JSON.stringify(response.data.accessToken)
@@ -138,7 +138,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         setAuth(response.data.accessToken);
         getUser(decodedToken.sub, response.data.accessToken, history, setLoad);
       })
-      .catch((err) => {
+      .catch((err: AxiosError) => {
         setLoad(false);
 
         notification.open({
