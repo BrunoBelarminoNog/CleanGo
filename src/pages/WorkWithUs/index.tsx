@@ -21,6 +21,8 @@ import { useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { CSSPlugin } from "gsap/CSSPlugin";
+import { Draggable } from "gsap/Draggable";
+
 import { useRef } from "react";
 
 const WorkWithUs = () => {
@@ -39,8 +41,10 @@ const WorkWithUs = () => {
   const SvgPath = useRef<SVGPathElement>(null);
   const LogoName = useRef<HTMLHeadingElement>(null);
 
+  const BackToTop = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger, CSSPlugin);
+    gsap.registerPlugin(ScrollTrigger, CSSPlugin, Draggable);
 
     gsap.from(FirstSection.current, {
       translateX: 500,
@@ -77,6 +81,15 @@ const WorkWithUs = () => {
         },
         "<"
       );
+
+    Draggable.create(BackToTop.current, {
+      type: "x,y",
+      edgeResistance: 0.65,
+      bounds: { minX: 10, maxX: -150, minY: 10, maxY: -200 },
+      onClick: () => {
+        window.scrollTo(0, 0);
+      },
+    });
   }, []);
 
   return (
@@ -139,11 +152,7 @@ const WorkWithUs = () => {
             Cadastre-se como profissional
           </Button>
         </FinishSection>
-        <ButtonUp
-          onClick={() => {
-            window.scrollTo(0, 0);
-          }}
-        >
+        <ButtonUp ref={BackToTop}>
           <FaAngleUp />
         </ButtonUp>
       </Container>

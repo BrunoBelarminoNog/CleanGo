@@ -631,19 +631,27 @@ export const VideoSectionTitle = styled.div`
 `;
 
 export const ButtonUp = styled.span`
-  width: 60px;
-  height: 60px;
+  width: 45px;
+  height: 45px;
   background-color: var(--green);
   border-radius: 50%;
   box-shadow: var(--shadow);
   position: fixed;
-  right: 50px;
-  bottom: 50px;
+  right: 30px;
+  bottom: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
   color: var(--white);
   cursor: pointer;
-  z-index: 500;
+  z-index: 2000;
+
+  @media screen and (min-width: 768px) {
+    width: 60px;
+    height: 60px;
+    font-size: 2rem;
+    right: 50px;
+    bottom: 50px;
+  }
 `;

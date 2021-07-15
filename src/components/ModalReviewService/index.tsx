@@ -25,6 +25,7 @@ import {
 import { useState } from "react";
 import { useEffect } from "react";
 import { useFeedback } from "../../providers/Feedbacks";
+import { format } from "date-fns";
 interface ModalProps {
   visible: boolean;
   setVisible: Dispatch<SetStateAction<boolean>>;
@@ -147,6 +148,8 @@ const ModalReviewService = ({ service, visible, setVisible }: ModalProps) => {
                 <GeneralInfo>{client.name}</GeneralInfo>
               </>
             )}
+            <Subtitles>Data:</Subtitles>
+            <GeneralInfo>{format(service.date, "dd MMM yyyy")}</GeneralInfo>
             <ContainerRow>
               <ContainerInfo>
                 <Subtitles>Duração total:</Subtitles>

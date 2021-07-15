@@ -48,6 +48,7 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { TextPlugin } from "gsap/TextPlugin";
+import { Draggable } from "gsap/Draggable";
 
 const HomePage = () => {
   const [beBoneIndex, setBeBoneIndex] = useState(0);
@@ -77,6 +78,9 @@ const HomePage = () => {
   const VideoElement = useRef<HTMLVideoElement>(null);
   const VideoTitle = useRef<HTMLHeadingElement>(null);
 
+  const ArrowBackToTop = useRef<HTMLDivElement>(null);
+  const ContainerPage = useRef<HTMLElement>(null);
+
   useEffect(() => {
     handleBackground(false);
     setInterval(() => {
@@ -88,7 +92,7 @@ const HomePage = () => {
     }, 6000);
 
     // gsap.timeline()
-    gsap.registerPlugin(TextPlugin, ScrollTrigger);
+    gsap.registerPlugin(TextPlugin, ScrollTrigger, Draggable);
 
     gsap.from(ImageOne.current, {
       opacity: 0,
@@ -271,6 +275,14 @@ const HomePage = () => {
       },
     });
 
+    Draggable.create(ArrowBackToTop.current, {
+      type: "x,y",
+      edgeResistance: 0.65,
+      bounds: { minX: 10, maxX: -150, minY: 10, maxY: -200 },
+      onClick: () => {
+        window.scrollTo(0, 0);
+      },
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -280,7 +292,7 @@ const HomePage = () => {
       <Header>
         <HeaderNav />
       </Header>
-      <Container>
+      <Container ref={ContainerPage}>
         <FirstSection>
           <div ref={FirstSectionContent}>
             <h2>
@@ -436,11 +448,7 @@ const HomePage = () => {
             <h2 ref={VideoTitle}>Conte com a gente na sua próxima limpeza!</h2>
           </VideoSectionTitle>
         </VideoSection>
-        <ButtonUp
-          onClick={() => {
-            window.scrollTo(0, 0);
-          }}
-        >
+        <ButtonUp ref={ArrowBackToTop}>
           <FaAngleUp />
         </ButtonUp>
       </Container>

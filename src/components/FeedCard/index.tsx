@@ -5,6 +5,11 @@ import Button from "../Button";
 import { ButtonOpen, FeedColumn, FeedPost, InputFeed } from "./styles";
 import { format } from "date-fns";
 import { FiMessageSquare } from "react-icons/fi";
+import { useEffect } from "react";
+
+import gsap from "gsap";
+import { Draggable } from "gsap/Draggable";
+import { useRef } from "react";
 
 const FeedCard = () => {
   const { feeds, feedPost } = useFeed();
@@ -26,9 +31,24 @@ const FeedCard = () => {
     feedPost(data);
   };
 
+  const ButtonMobile = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    gsap.registerPlugin(Draggable);
+
+    Draggable.create(ButtonMobile.current, {
+      type: "x,y",
+      edgeResistance: 0.65,
+      bounds: { minX: 10, maxX: -150, minY: 0, maxY: -200 },
+      onClick: () => {
+        setOpen(!open);
+      },
+    });
+  });
+
   return (
     <>
-      <ButtonOpen onClick={() => setOpen(!open)}>
+      <ButtonOpen ref={ButtonMobile}>
         <FiMessageSquare />
       </ButtonOpen>
       <FeedColumn open={open}>
