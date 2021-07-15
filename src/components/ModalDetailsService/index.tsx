@@ -1,3 +1,4 @@
+import { format } from "date-fns";
 import { SetStateAction, Dispatch } from "react";
 import { ServiceData } from "../../types/ServiceData";
 import formatValue from "../../utils/formatedPrice";
@@ -33,7 +34,7 @@ const ModalDetailsService = ({ service, visible, setVisible }: ModalProps) => {
       footer={null}
       closeIcon={<CloseIcon />}
       width={600}
-      title="Serviço disponível"
+      title="Serviço aceito"
       okText="Criar"
       cancelText="Cancelar"
     >
@@ -57,6 +58,8 @@ const ModalDetailsService = ({ service, visible, setVisible }: ModalProps) => {
         }`}</Adress>
         <Subtitles>Contratante:</Subtitles>
         <GeneralInfo>{service.contractor}</GeneralInfo>
+        <Subtitles>Data:</Subtitles>
+        <GeneralInfo>{format(service.date, "dd MMM yyyy")}</GeneralInfo>
         <ContainerRow>
           <ContainerInfo>
             <Subtitles>Duração total:</Subtitles>

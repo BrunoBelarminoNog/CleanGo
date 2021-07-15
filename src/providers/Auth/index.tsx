@@ -158,10 +158,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     setUser({});
     setAuth("");
     setIdClient(0);
-    localStorage.removeItem("@CleanGo/token");
-    localStorage.removeItem("@CleanGo/idClient");
-    localStorage.removeItem("@CleanGo/user");
-
+    localStorage.clear();
     history.push("/");
   };
 

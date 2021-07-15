@@ -4,11 +4,8 @@ import { IoExitOutline } from "react-icons/io5";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../../providers/Auth";
 import { FaCog } from "react-icons/fa";
-interface HeaderNavAuthProps {
-  name: string;
-}
 
-const HeaderNavAuth = ({ name }: HeaderNavAuthProps) => {
+const HeaderNavAuth = () => {
   const history = useHistory();
   const { userLogoff, user } = useAuth();
 

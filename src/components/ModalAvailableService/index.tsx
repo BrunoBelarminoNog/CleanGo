@@ -18,6 +18,7 @@ import {
 } from "./styles";
 import { useState } from "react";
 import { useEffect } from "react";
+import { format } from "date-fns";
 interface ModalProps {
   visible: boolean;
   setVisible: Dispatch<SetStateAction<boolean>>;
@@ -86,6 +87,8 @@ const ModalAvailableService = ({
         }`}</Adress>
         <Subtitles>Contratante:</Subtitles>
         <GeneralInfo>{client.name}</GeneralInfo>
+        <Subtitles>Data:</Subtitles>
+        <GeneralInfo>{format(service.date, "dd MMM yyyy")}</GeneralInfo>
         <ContainerRow>
           <ContainerInfo>
             <Subtitles>Duração total:</Subtitles>

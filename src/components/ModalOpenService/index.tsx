@@ -23,6 +23,7 @@ import {
 import { useClients } from "../../providers/Clients";
 import { FaRegStar, FaStar } from "react-icons/fa";
 import { useFeedback } from "../../providers/Feedbacks";
+import { format } from "date-fns";
 interface ModalProps {
   visible: boolean;
   setVisible: Dispatch<SetStateAction<boolean>>;
@@ -138,6 +139,8 @@ const ModalOpenService = ({ service, visible, setVisible }: ModalProps) => {
             <Subtitles>Contratado:</Subtitles>
             <GeneralInfo>{client.name}</GeneralInfo>
             <ContainerRow>
+              <Subtitles>Data:</Subtitles>
+              <GeneralInfo>{format(service.date, "dd MMM yyyy")}</GeneralInfo>
               <ContainerInfo>
                 <Subtitles>Duração total:</Subtitles>
                 <GeneralInfo className="hours">
