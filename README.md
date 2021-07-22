@@ -89,9 +89,11 @@ yarn start || npm start
 
 <br />
 <p align="center">
-  <img src="./cleango.vercel.app_ (1).png" />
-  <img src="./cleango.vercel.app_(iPhone 6_7_8 Plus).png"/>
+  <img src="./cleango.vercel.app_ (1).png"  width="40%"/>
+  <img src="./cleango.vercel.app_(iPhone 6_7_8 Plus).png" width="40%"/>
 </p>
+<br />
+
 <p align="center">
   <img src="./ezgif.com-gif-maker.gif" width="700px"/>
 </p>
