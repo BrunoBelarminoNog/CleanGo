@@ -90,7 +90,7 @@ yarn start || npm start
 <br />
 <p align="center">
   <img src="./cleango.vercel.app_ (1).png" />
-<img src="./cleango.vercel.app_(iPhone 6_7_8 Plus).png" width="700px"/>
+  <img src="./cleango.vercel.app_(iPhone 6_7_8 Plus).png"/>
 </p>
 <p align="center">
   <img src="./ezgif.com-gif-maker.gif" width="700px"/>
@@ -99,7 +99,7 @@ yarn start || npm start
 
 # :pushpin: Contribuindo
 
-Sinta-se à vontade para registrar um novo problema com o respectivo título e descrição no repositório Torneio TriBruxo . Se você já encontrou uma solução para o problema, eu adoraria revisar sua solicitação de pull!
+Sinta-se à vontade para registrar um novo problema com o respectivo título e descrição no repositório CleanGo . Se você já encontrou uma solução para o problema, eu adoraria revisar sua solicitação de pull!
 
 Verifique a página de contribuição para ver os melhores lugares para registrar problemas, iniciar discussões e começar a contribuir.
 
@@ -109,4 +109,4 @@ Lançado em 2021. Este projeto está sob a licença do MIT .
 
 Feito com muita dedicação por Bruno Belarmino :zap:
 
-Me siga nas redes! [LinkdIn](https://www.linkedin.com/in/bruno-belarmino-nog/)
+Me siga nas redes! [LinkedIn](https://www.linkedin.com/in/bruno-belarmino-nog/)
