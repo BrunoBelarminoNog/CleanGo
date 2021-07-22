@@ -1,46 +1,112 @@
-# Getting Started with Create React App
+<p align="center">
+  <img alt="CleanGo" src="./cleango.vercel.app_.png" />
+</p>
+<br>
+<hr>
+<br>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<h2 align="center">
+  Projeto: CleanGo
+</h2>
+<br>
 
-## Available Scripts
+<blockquote align="center">"Num mundo em constante mudança, a única garantia para não falharmos, é não corrermos riscos.”
 
-In the project directory, you can run:
+(Mark Zuckerberg)</blockquote>
+<br>
 
-### `yarn start`
+<p align="center">
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+  <a href="LICENSE">
+    <img alt="LICENSE" src="https://img.shields.io/npm/l/express">
+  </a>
+  <a href="NPM">
+    <img alt="NPM" src="https://img.shields.io/npm/v/npm">
+  </a>
+  <a href="GitHub followers">
+    <img alt="GitHub followers" src="https://img.shields.io/github/followers/BrunoBelarminoNog?style=social">
+  </a>
+</p>
+<hr>
+<br>
+<br>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+# :rocket: Sobre o projeto
 
-### `yarn test`
+Com o objetivo de conectar profissionais autônomos de limpeza com pessoas que desejam contratar estes serviços de forma simplificada, ágil e com segurança, nasce a CleanGo, uma plataforma que pretende desburocratizar este processo.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Desenvolvido em equipe, dentro do curso da Kenzie Academy Brasil, com este projeto pude desenvolver tanto minhas hard skills, aprendendo mais sobre o uso do Typescript, autenticação com JWT, animações com GSAP e o próprio React, mas também foi uma grande oportunidade de desenvolver minhas soft skills, realizando o papel de Tech Lead da equipe.
 
-### `yarn build`
+**O CleanGo é um projeto realizado dentro do curso de desenvolvimento full-stack da Kenzie Academy Brasil.**
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## :computer: Tecnologias utilizadas
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+A seguinte stack foi utilizada na construção do projeto:
 
-### `yarn eject`
+- ReactJS
+- TypeScript
+- GreenSock
+- Yup
+- Axios
+- JWT
+- Styled-components
+- JSON-Server
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+<br>
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## :construction_worker: Instalação
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**Primeiramente você precisa ter instalado o [Node.js](https://nodejs.org/en/download/), depois efetuar o clone deste repositório a partir do seguinte comando:**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+git clone https://github.com/BrunoBelarminoNog/cleanGo.git
+```
 
-## Learn More
+URLs SSH fornecem acesso a um repositório Git via SSH, um protocolo seguro. Se você tiver uma chave SSH registrada em
+sua conta do Github, clone o projeto usando este comando:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```
+git clone git@github.com:BrunoBelarminoNog/cleanGo.git
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**Instale as dependências**
+
+```
+yarn || npm install
+```
+
+**Inicie o servidor**
+
+```
+yarn start || npm start
+```
+
+<br>
+
+# :art: Layout
+
+<br />
+<p align="center">
+  <img src="./cleango.vercel.app_ (1).png" />
+<img src="./cleango.vercel.app_(iPhone 6_7_8 Plus).png" width="700px"/>
+</p>
+<p align="center">
+  <img src="./ezgif.com-gif-maker.gif" width="700px"/>
+</p>
+<br />
+
+# :pushpin: Contribuindo
+
+Sinta-se à vontade para registrar um novo problema com o respectivo título e descrição no repositório Torneio TriBruxo . Se você já encontrou uma solução para o problema, eu adoraria revisar sua solicitação de pull!
+
+Verifique a página de contribuição para ver os melhores lugares para registrar problemas, iniciar discussões e começar a contribuir.
+
+# :unlock: Licença
+
+Lançado em 2021. Este projeto está sob a licença do MIT .
+
+Feito com muita dedicação por Bruno Belarmino :zap:
+
+Me siga nas redes! [LinkdIn](https://www.linkedin.com/in/bruno-belarmino-nog/)
